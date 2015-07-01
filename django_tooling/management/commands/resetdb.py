@@ -39,6 +39,6 @@ class Command(BaseCommand):
         if not options[self.__OPTION_NAME_NOSYNC]:
             call_command('migrate')
 
-        if self.__OPTION_NAME_DEFAULT_MAIL in options and self.__OPTION_NAME_DEFAULT_PW in options:
+        if options[self.__OPTION_NAME_DEFAULT_MAIL] and options[self.__OPTION_NAME_DEFAULT_PW]:
             call_command('createtestuser', options[self.__OPTION_NAME_DEFAULT_MAIL], options[self.__OPTION_NAME_DEFAULT_PW],
                          superuser=True, staff=True, email=options[self.__OPTION_NAME_DEFAULT_MAIL])

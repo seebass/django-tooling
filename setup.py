@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-tooling',
-    version="0.9.0",
+    version="0.9.1",
     url='https://github.com/seebass/django-tooling',
     license='MIT',
     description='Several tools for working with Django',
