@@ -32,6 +32,7 @@ class Command(BaseCommand):
             counter += 1
 
         cursor.execute('SET FOREIGN_KEY_CHECKS = 1; COMMIT')
+        cursor.close()
         connection.close()
 
         print('\nDropped {} tables'.format(counter))
