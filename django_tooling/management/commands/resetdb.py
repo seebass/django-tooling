@@ -5,16 +5,12 @@ from optparse import make_option
 
 
 class Command(BaseCommand):
-    __OPTION_NAME_DEFAULT_MAIL = 'email'
-    __OPTION_NAME_DEFAULT_PW = 'password'
     __OPTION_NAME_NOSYNC = 'nosync'
     __OPTION_NAME_TRUNCATE = 'truncate'
     __OPTION_NAME_IGNORE_TABLES = 'ignoretables'
 
     help = 'Drops all database tables.'
     option_list = BaseCommand.option_list + (
-        make_option('--' + __OPTION_NAME_DEFAULT_MAIL, action='store', help='Mail of user to create', default=None),
-        make_option('--' + __OPTION_NAME_DEFAULT_PW, action='store', help='Password of user to create', default=None),
         make_option('--' + __OPTION_NAME_NOSYNC, action='store_true',
                     help='Option to skip calling migrate after resetdb', default=False),
         make_option('--' + __OPTION_NAME_TRUNCATE, action='store_true',
@@ -33,10 +29,6 @@ class Command(BaseCommand):
 
         if not options[self.__OPTION_NAME_NOSYNC]:
             call_command('migrate')
-
-        if options[self.__OPTION_NAME_DEFAULT_MAIL] and options[self.__OPTION_NAME_DEFAULT_PW]:
-            call_command('createtestuser', options[self.__OPTION_NAME_DEFAULT_MAIL], options[self.__OPTION_NAME_DEFAULT_PW],
-                         superuser=True, staff=True, email=options[self.__OPTION_NAME_DEFAULT_MAIL])
 
     def __dropOrTruncateTables(self, ignoreTables, isTruncate):
         cursor = connection.cursor()
